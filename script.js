@@ -3,8 +3,8 @@
 const  tab_header_left = document.querySelector(".tab-header-left");
 const  tab_header_right = document.querySelector(".tab-header-right");
 const  text_container = document.querySelector(".text-container");
-const  img_container = document.querySelector(".img-container");
-const  tab_main_left = document.querySelector(".tab-main-left");
+//const  img_container = document.querySelector(".img-container");
+//const  tab_main_left = document.querySelector(".tab-main-left");
 const  tab_main_right = document.querySelector(".tab-main-right");
 const  tab_main = document.querySelector(".tab-main");
 const  footer_left = document.querySelector(".tab-footer-left");
@@ -17,10 +17,12 @@ updateTab = function (dataArray) {
     tab_main.innerHTML = '';
     footer_left.innerHTML = footer_left_content;
     footer_right.innerHTML = footer_right_content;
-    dataArray.forEach(element => {
+
+    dataArray.forEach((element, index) => {
+        let idd = "cont-" + index;
         tab_main.innerHTML += `
                 <div class="tab-main-left">
-                        <div class="img-container"> <a href=${element.url}><img src="${element.img_url}" width=100% /></a></div>
+                        <div class="img-container" id=${idd}> <a href=${element.url}><img src="img/window.svg" align="center" width=101% /></a></div>
                     </div>
                     <div class="vl-container"><img src="./img/vl.png" height=${hg} width="2px"></div>
                     <div class="tab-main-right">
@@ -28,7 +30,17 @@ updateTab = function (dataArray) {
                     </div>
                 </div>
             `;
-    });
+           let ic = document.querySelector(`#cont-${index}`);
+           ic.style = `
+                    width: 64%;
+                    background-color: rgb(13, 13, 13);
+                    margin: auto;
+                    background-image: url(${element.img_url});
+                    background-size: contain;
+                    padding: -10px
+                    `;
+     });
+    //  background-image: url(img/capture.jpg); margin: auto; background-size: cover;background-image: url(${element.img_url});
 }
 
 tab_header_left.classList.remove('passive-tab-header');
